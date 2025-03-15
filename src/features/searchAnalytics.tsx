@@ -4,11 +4,12 @@ import "../styles/searchAnalytics.css"
 
 interface Props {
     analytics: SearchAnalyticsResult;
+    show: boolean;
 }
 
 
-export const SearchAnalytics: React.FC<Props> = ({ analytics }) => {
-    return <div id="search-analytics">
+export const SearchAnalytics: React.FC<Props> = ({ analytics, show }) => {
+    return <div id="search-analytics" style={{display: show?'inline':'none'}}>
         <div>
 
         { analytics.pairs.map((alignment, index) => (

@@ -48,6 +48,8 @@ const SAMPLE_PAPERS: PaperMetadata[] = [
 
 export default function Query(){
 
+    // const revealAnalytics = () => {}
+
     return <div id='query-page'>
         <Header />
 
@@ -66,9 +68,9 @@ export default function Query(){
             </button>
         </div>
 
-        <SearchAnalytics analytics={SAMPLE_ANALYTICS}  />
+        <SearchAnalytics analytics={SAMPLE_ANALYTICS} show={false}/>
 
-        <div id='response-box'>
+        <div id='response-box' style={{display: 'none'}}>
             <h1>Here's what we found</h1>
 
             {SAMPLE_PAPERS.map((paper, index) => (
