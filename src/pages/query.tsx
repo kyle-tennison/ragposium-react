@@ -53,7 +53,13 @@ export default function Query(){
 
         <div id='query-box'>
             <h1 className='dark-cream'>How can we help you today?</h1>
-            <textarea className='input-box'>
+            <textarea className='input-box' placeholder='Enter a phrase here'
+              onInput={(e: React.FormEvent<HTMLTextAreaElement>) => {
+                const textarea = e.target as HTMLTextAreaElement;
+                textarea.style.height = `auto`; // Adjust height to content
+                textarea.style.height = `${textarea.scrollHeight}px`; // Adjust height to content
+              }}
+            >
             </textarea>
             <button>
                 <i className="bi bi-arrow-up-circle-fill dark-cream"></i>

@@ -28,6 +28,7 @@
     background-color: white;
     width: 100%;
     min-height: 123px;
+    overflow-y: hidden;
     box-shadow: 0px 4px 8px #00000040;
     border-radius: 7px;
     padding: 10px;
@@ -36,10 +37,16 @@
     font-family: "Averia Serif Libre", serif;
     font-weight: 100;
     font-size: 14px;
-    padding: 20px;
+    padding: 20px 40px 20px 20px;
     color: var(--dark-cream);
     box-sizing: border-box;
 }
+
+#query-page #query-box .input-box::placeholder{
+    color: var(--dark-cream);
+    opacity: 50%;
+}
+
 
 #query-page #query-box .input-box:focus {
     outline: none;
@@ -94,6 +101,7 @@
     font-weight: bold;
     margin: 0;
     transition: 0.1s;
+    display: inline-block;
 }
 #query-page #response-box h2:hover{
     opacity: 80%;
@@ -127,5 +135,6 @@
 #query-page #response-box .cite:hover {
     background-color: var(--light-cream);
     cursor: pointer;
+    opacity: 80%;
 
 }
