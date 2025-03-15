@@ -27,7 +27,7 @@
 
 .word-alignment-item .word-alignment-bar {
     background-color: var(--medium-cream);
-    color: white;
+    color: var(--dark-cream);
     border-radius: 7px;
     padding: 3px 10px;
     box-sizing: border-box;
