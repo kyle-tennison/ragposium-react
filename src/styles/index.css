@@ -6,16 +6,27 @@
 }
 
 :root {
-    --main-color: #3498db;
     --dark-cream: #A8773E;
     --medium-cream: #D3A876;
     --light-cream: hsl(37, 69%, 95%);
-  }
+    --page-offset: white;
+    --page-color: var(--light-cream)
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --dark-cream: #FBF4E9;
+        --medium-cream: #6A6966;
+        --light-cream: #76736E;
+        --page-offset: #76736E;
+        --page-color: #575655;
+    }
+}
 
 body {
     /* padding: 0;
     margin: 0; */
-    background-color: var(--light-cream);
+    background-color: var(--page-color);
     font-family: "Averia Serif Libre", serif;
 }
 

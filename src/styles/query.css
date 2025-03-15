@@ -25,7 +25,7 @@
 }
 
 #query-page #query-box .input-box {
-    background-color: white;
+    background-color: var(--page-offset);
     width: 100%;
     min-height: 123px;
     box-shadow: 0px 4px 8px #00000040;
@@ -67,7 +67,7 @@
 #query-page #response-box {
     width: 700px;
     align-self: center;
-    background-color: white;
+    background-color: var(--page-offset);
     border-radius: 7px;
     box-shadow: 0px 4px 8px #00000040;
     color: var(--dark-cream);
