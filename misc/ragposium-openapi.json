@@ -1,0 +1,153 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Ragposium",
+    "description": "API documentation for Ragposium",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Index",
+        "description": "Root of the API",
+        "operationId": "index__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MessageResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health",
+        "description": "Endpoint to check health.",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MessageResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/query": {
+      "post": {
+        "summary": "Query Endpoint",
+        "description": "Query the database for matching papers.",
+        "operationId": "query_endpoint_query_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/QueryRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/QueryResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "MessageResponse": {
+        "properties": { "message": { "type": "string", "title": "Message" } },
+        "type": "object",
+        "required": ["message"],
+        "title": "MessageResponse",
+        "description": "Generic request for messages."
+      },
+      "PaperMetadata": {
+        "properties": {
+          "url": { "type": "string", "title": "Url" },
+          "title": { "type": "string", "title": "Title" },
+          "authors": { "type": "string", "title": "Authors" },
+          "abstract": { "type": "string", "title": "Abstract" }
+        },
+        "type": "object",
+        "required": ["url", "title", "authors", "abstract"],
+        "title": "PaperMetadata",
+        "description": "Metadata representation of an arXiv paper.\n\nAttributes\n----------\nurl : str\n    The URL of the paper.\ntitle : str\n    The title of the paper.\nauthors : str\n    The authors of the paper.\nabstract : str\n    The abstract of the paper."
+      },
+      "QueryRequest": {
+        "properties": {
+          "query": { "type": "string", "title": "Query" },
+          "n_results": { "type": "integer", "title": "N Results" }
+        },
+        "type": "object",
+        "required": ["query", "n_results"],
+        "title": "QueryRequest",
+        "description": "Requests papers corresponding to a query."
+      },
+      "QueryResponse": {
+        "properties": {
+          "papers": {
+            "items": { "$ref": "#/components/schemas/PaperMetadata" },
+            "type": "array",
+            "title": "Papers"
+          },
+          "distances": {
+            "items": { "type": "number" },
+            "type": "array",
+            "title": "Distances"
+          }
+        },
+        "type": "object",
+        "required": ["papers", "distances"],
+        "title": "QueryResponse",
+        "description": "Response to paper query."
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
