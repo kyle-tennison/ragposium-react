@@ -30,7 +30,7 @@
     min-height: 123px;
     overflow-y: hidden;
     box-shadow: 0px 4px 8px #00000040;
-    border-radius: 7px;
+    border-radius: var(--std-border-radius);
     padding: 10px;
     border: none;
     resize: none;
@@ -75,7 +75,7 @@
     width: 700px;
     align-self: center;
     background-color: var(--page-offset);
-    border-radius: 7px;
+    border-radius: var(--std-border-radius);
     box-shadow: 0px 4px 8px #00000040;
     color: var(--dark-cream);
     padding: 20px 40px;
