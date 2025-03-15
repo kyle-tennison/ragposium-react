@@ -1,0 +1,44 @@
+#search-analytics {
+    width: 700px;
+    align-self: center;
+    margin-top: 10px;
+}
+
+.word-alignment-item {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-size: 12px;
+    margin-top: 10px;
+    width: 100%;
+
+}
+
+.word-alignment-item a {
+    color: var(--dark-cream);
+    font-style: italic;
+    width: 70px;
+}
+
+.word-alignment-item .word-alignment-bar-container {
+    flex-grow: 1;
+    display: relative;
+}
+
+.word-alignment-item .word-alignment-bar {
+    background-color: var(--medium-cream);
+    color: white;
+    border-radius: 7px;
+    padding: 3px 10px;
+    box-sizing: border-box;
+    min-width: fit-content;
+}
+
+#bottom-axis {
+    color: var(--dark-cream);
+    font-size: 14px;
+    text-align: right;
+    border-top: 1.5px solid var(--dark-cream);
+    margin-top: 10px;
+    padding-top: 5px;
+}
