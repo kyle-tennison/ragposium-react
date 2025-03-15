@@ -9,12 +9,13 @@
     --main-color: #3498db;
     --dark-cream: #A8773E;
     --medium-cream: #D3A876;
+    --light-cream: hsl(37, 69%, 95%);
   }
 
 body {
     /* padding: 0;
     margin: 0; */
-    background-color: hsl(37, 69%, 95%);
+    background-color: var(--light-cream);
     font-family: "Averia Serif Libre", serif;
 }
 

@@ -9,3 +9,10 @@ export interface SearchAnalyticsResult {
     maxAlignment: number;
 }
   
+
+export interface PaperMetadata{
+  url: string
+  title: string
+  authors: string
+  abstract: string
+} 
