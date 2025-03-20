@@ -2,32 +2,13 @@ import '../styles/query.css'
 import Header from '../layouts/header'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { SearchAnalytics } from '../features/searchAnalytics';
-import { PaperMetadata, SearchAnalyticsResult } from '../types/analytics';
+import { PaperMetadata } from '../types/analytics';
+import { useState } from 'react';
+import { baseUrl, ragposiumClient } from '../services/ragposium-core';
 
+import type { components } from "../types/ragposiumSchema"
 
-
-const SAMPLE_ANALYTICS: SearchAnalyticsResult = {
-    nResults: 3,
-    pairs: [
-        {
-            word: "Psycology",
-            alignment: 65,
-        },
-        {
-            word: "Violence",
-            alignment: 54,
-        },
-        {
-            word: "Adolescence",
-            alignment: 30,
-        },
-        {
-            word: "Funny",
-            alignment: 19,
-        }
-    ],
-    maxAlignment: 65,
-}
+type DictionaryQueryResponse = components["schemas"]["DictionaryQueryResponse"];
 
 
 const SAMPLE_PAPERS: PaperMetadata[] = [
@@ -48,7 +29,49 @@ const SAMPLE_PAPERS: PaperMetadata[] = [
 
 export default function Query(){
 
-    // const revealAnalytics = () => {}
+    const [textareaContent, setTextareaContent] = useState<string>("");
+
+    const [searchAnalytics, setSearchAnalytics] = useState<DictionaryQueryResponse|null>(null);
+
+
+    const sendQuery = async () => {
+        setSearchAnalytics(null); // reset from last request
+
+        console.debug("Sending textarea content:", textareaContent);
+        console.debug("Using base url:", baseUrl)
+
+        const dict_query_future = ragposiumClient.POST("/query-dict", {
+            body: {
+                query: textareaContent,
+                n_results: 4,
+            }
+        })
+
+
+        // const paper_query_future = ragposiumClient.POST("/query-papers", {
+        //     body:{
+        //         query: textareaContent,
+        //         n_results: 5
+        //     }
+        // })
+
+        // const dict_query = await dict_query_future
+        // const paper_query = await paper_query_future
+        
+        dict_query_future.then((value) => {
+
+            console.log("Dictionary query responded with:", value)
+
+            if (value.error) {
+                throw new Error(`Failed to query dictionary: ${value.error.detail?.toString()}`)
+            }
+
+            setSearchAnalytics(value.data)
+        })
+        
+        
+
+    }
 
     return <div id='query-page'>
         <Header />
@@ -61,14 +84,17 @@ export default function Query(){
                 textarea.style.height = `auto`; // Adjust height to content
                 textarea.style.height = `${textarea.scrollHeight}px`; // Adjust height to content
               }}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                setTextareaContent(e.target.value)
+              }}
             >
             </textarea>
-            <button>
+            <button onClick={sendQuery}>
                 <i className="bi bi-arrow-up-circle-fill dark-cream"></i>
             </button>
         </div>
 
-        <SearchAnalytics analytics={SAMPLE_ANALYTICS} show={false}/>
+        <SearchAnalytics analytics={searchAnalytics} show={searchAnalytics !== null}/>
 
         <div id='response-box' style={{display: 'none'}}>
             <h1>Here's what we found</h1>

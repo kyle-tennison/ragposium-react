@@ -40,11 +40,11 @@
         }
       }
     },
-    "/query": {
+    "/query-papers": {
       "post": {
-        "summary": "Query Endpoint",
+        "summary": "Query Papers",
         "description": "Query the database for matching papers.",
-        "operationId": "query_endpoint_query_post",
+        "operationId": "query_papers_query_papers_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -58,7 +58,42 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/QueryResponse" }
+                "schema": { "$ref": "#/components/schemas/PaperQueryResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/query-dict": {
+      "post": {
+        "summary": "Query Dict",
+        "description": "Query the dictionary database for similar words.",
+        "operationId": "query_dict_query_dict_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/QueryRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DictionaryQueryResponse"
+                }
               }
             }
           },
@@ -76,6 +111,24 @@
   },
   "components": {
     "schemas": {
+      "DictionaryQueryResponse": {
+        "properties": {
+          "words": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Words"
+          },
+          "distances": {
+            "items": { "type": "number" },
+            "type": "array",
+            "title": "Distances"
+          }
+        },
+        "type": "object",
+        "required": ["words", "distances"],
+        "title": "DictionaryQueryResponse",
+        "description": "Response to dictionary query."
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -106,17 +159,7 @@
         "title": "PaperMetadata",
         "description": "Metadata representation of an arXiv paper.\n\nAttributes\n----------\nurl : str\n    The URL of the paper.\ntitle : str\n    The title of the paper.\nauthors : str\n    The authors of the paper.\nabstract : str\n    The abstract of the paper."
       },
-      "QueryRequest": {
-        "properties": {
-          "query": { "type": "string", "title": "Query" },
-          "n_results": { "type": "integer", "title": "N Results" }
-        },
-        "type": "object",
-        "required": ["query", "n_results"],
-        "title": "QueryRequest",
-        "description": "Requests papers corresponding to a query."
-      },
-      "QueryResponse": {
+      "PaperQueryResponse": {
         "properties": {
           "papers": {
             "items": { "$ref": "#/components/schemas/PaperMetadata" },
@@ -131,8 +174,18 @@
         },
         "type": "object",
         "required": ["papers", "distances"],
-        "title": "QueryResponse",
+        "title": "PaperQueryResponse",
         "description": "Response to paper query."
+      },
+      "QueryRequest": {
+        "properties": {
+          "query": { "type": "string", "title": "Query" },
+          "n_results": { "type": "integer", "title": "N Results" }
+        },
+        "type": "object",
+        "required": ["query", "n_results"],
+        "title": "QueryRequest",
+        "description": "Requests papers corresponding to a query."
       },
       "ValidationError": {
         "properties": {

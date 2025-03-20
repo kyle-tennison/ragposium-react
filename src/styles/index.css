@@ -10,7 +10,7 @@
     --medium-cream: #D3A876;
     --light-cream: hsl(37, 69%, 95%);
     --page-offset: white;
-    --page-color: var(--light-cream)
+    --page-color: var(--light-cream);
 
     --std-border-radius: 10px;
 }
