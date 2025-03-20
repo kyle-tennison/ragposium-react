@@ -10,30 +10,33 @@ const GITHUB_LINK =
 const SCROLL_THRESHOLD = 150;
 
 export default function Header() {
+  const headerElement = useRef<HTMLDivElement | null>(null);
 
-  const headerElement = useRef<HTMLDivElement|null>(null);
-
-  
-  useEffect(()=>{
-    window.addEventListener('scroll', () => {
-      console.debug(window.scrollY)
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      console.debug(window.scrollY);
       if (window.scrollY > SCROLL_THRESHOLD) {
-        if (headerElement.current){
+        if (headerElement.current) {
           // headerElement.current.style.opacity = "0"
-          headerElement.current.style.boxShadow = "0px 4px 8px rgba(0, 0, 0, 0.10)"
+          headerElement.current.style.boxShadow =
+            "0px 4px 8px rgba(0, 0, 0, 0.10)";
         }
-      }
-      else {
-        if (headerElement.current){
+      } else {
+        if (headerElement.current) {
           // headerElement.current.style.opacity = "1"
-          headerElement.current.style.boxShadow = "none"
+          headerElement.current.style.boxShadow = "none";
         }
       }
-    })
-  }, [])
+    });
+  }, []);
 
   return (
-    <div className="header" ref={(el) => {headerElement.current = el}}>
+    <div
+      className="header"
+      ref={(el) => {
+        headerElement.current = el;
+      }}
+    >
       <div className="logo-container">
         <Logo />
         <a className="logo-font dark-cream">Ragposium</a>
