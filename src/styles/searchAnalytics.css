@@ -11,6 +11,7 @@
     font-size: 12px;
     margin-top: 10px;
     width: 100%;
+    transition: 0.3s;
 
 }
 
@@ -28,7 +29,7 @@
 .word-alignment-item .word-alignment-bar {
     background-color: var(--medium-cream);
     color: var(--dark-cream);
-    border-radius: 7px;
+    border-radius: var(--std-border-radius);
     padding: 3px 10px;
     box-sizing: border-box;
     min-width: fit-content;
@@ -41,4 +42,23 @@
     border-top: 1.5px solid var(--dark-cream);
     margin-top: 10px;
     padding-top: 5px;
+}
+
+
+/* Animations */
+
+.expand-horiz {
+    animation: expand-horiz 0.6s ease-in-out forwards;
+    transform-origin: left;
+}
+
+@keyframes expand-horiz {
+    from {
+        transform: scaleX(0);
+        opacity: 1;
+    }
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
 }
