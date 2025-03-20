@@ -1,28 +1,28 @@
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 10px 0px 10px 3%;
-    width: 100%;
-    background-color: var(--page-color);
-    /* box-shadow: 0px 4px 8px #00000020; */
-    margin: 0;
-    z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px 0px 10px 3%;
+  width: 100%;
+  background-color: var(--page-color);
+  /* box-shadow: 0px 4px 8px #00000020; */
+  margin: 0;
+  z-index: 10;
 }
 
 .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
 }
 
 .logo-container .logo-font {
-    font-weight: 300;
-    font-size: 25px;
+  font-weight: 300;
+  font-size: 25px;
 }
 
-.logo-container .logo{
-    padding: 0;
-    height: 35px;
+.logo-container .logo {
+  padding: 0;
+  height: 35px;
 }

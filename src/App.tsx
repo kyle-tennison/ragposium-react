@@ -1,13 +1,12 @@
-import './styles/App.css'
-import Query from './pages/query'
+import "./styles/App.css";
+import Query from "./pages/query";
 
 function App() {
-
   return (
     <>
       <Query />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
