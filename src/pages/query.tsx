@@ -84,9 +84,9 @@ export default function Query() {
             setTextareaContent(e.target.value);
           }}
           onKeyDown={(ev) => {
-            if (ev.key == 'Enter' && !ev.shiftKey){ 
-                ev.preventDefault()
-                sendQuery()
+            if (ev.key == "Enter" && !ev.shiftKey) {
+              ev.preventDefault();
+              sendQuery();
             }
           }}
         ></textarea>
