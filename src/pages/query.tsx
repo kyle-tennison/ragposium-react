@@ -2,29 +2,14 @@ import '../styles/query.css'
 import Header from '../layouts/header'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { SearchAnalytics } from '../features/searchAnalytics';
-import { PaperMetadata } from '../types/analytics';
 import { useState } from 'react';
 import { baseUrl, ragposiumClient } from '../services/ragposium-core';
 
 import type { components } from "../types/ragposiumSchema"
+import { ResponseBox } from '../features/responseBox';
 
 type DictionaryQueryResponse = components["schemas"]["DictionaryQueryResponse"];
-
-
-const SAMPLE_PAPERS: PaperMetadata[] = [
-    {
-        url: "example.com",
-        title: "A psychoanalysis of war paraphernalia bedroom decorations",
-        authors: "M. Heisenberg, K. Michael, A. Jones",
-        abstract: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisi vel consectetur interdum, nisl nisi consequat nunc, vitae scelerisque eros eros in nisl. Fusce vel orci sit amet massa luctus sagittis. Proin id eros ut velit tempor bibendum. Duis euismod, nulla eu tempor cursus, erat nunc consectetur dui, vel euismod..."
-    },
-    {
-        url: "example.com",
-        title: "A psychoanalysis of war paraphernalia bedroom decorations",
-        authors: "M. Heisenberg, K. Michael, A. Jones",
-        abstract: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisi vel consectetur interdum, nisl nisi consequat nunc, vitae scelerisque eros eros in nisl. Fusce vel orci sit amet massa luctus sagittis. Proin id eros ut velit tempor bibendum. Duis euismod, nulla eu tempor cursus, erat nunc consectetur dui, vel euismod..."
-    },
-]
+type PaperQueryResponse = components["schemas"]["PaperQueryResponse"];
 
 
 export default function Query(){
@@ -32,10 +17,13 @@ export default function Query(){
     const [textareaContent, setTextareaContent] = useState<string>("");
 
     const [searchAnalytics, setSearchAnalytics] = useState<DictionaryQueryResponse|null>(null);
+    const [availablePapers, setAvailablePapers] = useState<PaperQueryResponse|null>(null);
 
 
     const sendQuery = async () => {
-        setSearchAnalytics(null); // reset from last request
+         // reset from last request
+        setSearchAnalytics(null);
+        setAvailablePapers(null);
 
         console.debug("Sending textarea content:", textareaContent);
         console.debug("Using base url:", baseUrl)
@@ -48,15 +36,12 @@ export default function Query(){
         })
 
 
-        // const paper_query_future = ragposiumClient.POST("/query-papers", {
-        //     body:{
-        //         query: textareaContent,
-        //         n_results: 5
-        //     }
-        // })
-
-        // const dict_query = await dict_query_future
-        // const paper_query = await paper_query_future
+        const paper_query_future = ragposiumClient.POST("/query-papers", {
+            body:{
+                query: textareaContent,
+                n_results: 5
+            }
+        })
         
         dict_query_future.then((value) => {
 
@@ -67,6 +52,16 @@ export default function Query(){
             }
 
             setSearchAnalytics(value.data)
+        })
+
+        paper_query_future.then((value) => {
+            console.log("Paper query responded with:", value)
+
+            if (value.error) {
+                throw new Error(`Failed to query papers: ${value.error.detail?.toString()}`)
+            }
+
+            setAvailablePapers(value.data)
         })
         
         
@@ -96,22 +91,7 @@ export default function Query(){
 
         <SearchAnalytics analytics={searchAnalytics} show={searchAnalytics !== null}/>
 
-        <div id='response-box' style={{display: 'none'}}>
-            <h1>Here's what we found</h1>
-
-            {SAMPLE_PAPERS.map((paper, index) => (
-                <div key={index} className='response-container'>
-                    <a className='authors'>{paper.authors}</a>
-                    <h2>{paper.title}</h2>
-                    <p className='abstract'>{paper.abstract}</p>
-                    <button className='cite'>
-                        <i className="bi bi-quote"></i>
-                    </button>
-                </div>
-                ))}
-
-        </div>
-
+        <ResponseBox papers={availablePapers}/>
 
     </div>
 }

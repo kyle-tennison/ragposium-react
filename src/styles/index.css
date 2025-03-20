@@ -34,6 +34,20 @@ body {
     font-family: "Averia Serif Libre", serif;
 }
 
+
 .dark-cream {
     color: var(--dark-cream);
 }
+
+.fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+}
+
+@keyframes fade-in {
+    from {
+      opacity: 0%;
+    }
+    to {
+      opacity: 100%;
+    }
+  }

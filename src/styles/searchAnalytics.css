@@ -47,20 +47,6 @@
 
 /* Animations */
 
-.fade-in {
-    animation: fade-in 0.6s ease-out forwards;
-}
-
-@keyframes fade-in {
-    from {
-      opacity: 0%;
-    }
-    to {
-      opacity: 100%;
-    }
-  }
-
-
 .expand-horiz {
     animation: expand-horiz 0.6s ease-in-out forwards;
     transform-origin: left;

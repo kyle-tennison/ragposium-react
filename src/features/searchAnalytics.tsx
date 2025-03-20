@@ -12,6 +12,7 @@ interface Props {
 }
 
 const ANIMATE_DELAY = 200 // ms
+const BENCHMARK_DISTANCE = 1.5;
 
 export const SearchAnalytics: React.FC<Props> = ({ analytics, show }) => {
 
@@ -75,19 +76,18 @@ export const SearchAnalytics: React.FC<Props> = ({ analytics, show }) => {
 
         { analytics?.words.map((_, index) => {
         
-        const maxDistance = Math.max(...analytics.distances)
         const minDistance = Math.min(...analytics.distances)
         const word = analytics.words[index];
         const distance = analytics.distances[index];
 
-        const relativeAlignment = (maxDistance - distance) / maxDistance
-        const maxAlignment = (maxDistance - minDistance) / maxDistance
+        const relativeAlignment = (BENCHMARK_DISTANCE - distance) / BENCHMARK_DISTANCE
+        const maxAlignment = (BENCHMARK_DISTANCE - minDistance) / BENCHMARK_DISTANCE
 
         return <div key={index} className="word-alignment-item" ref={(el) => {wordAlignmentRefs.current[index] = el}}>
             <a ref={(el) => {wordAlignmentWords.current[index] = el}}>{word}</a>
             <div className="word-alignment-bar-container">
                 <div key={index} className="word-alignment-bar" style={{width: `${100 * relativeAlignment / maxAlignment}%`}} ref={(el) => {wordAlignmentBars.current[index] = el}}>
-                    {`${100 * relativeAlignment}%`}
+                    {`${(100 * relativeAlignment).toFixed(0)}%`}
                 </div>
             </div>
         </div>
