@@ -38,17 +38,17 @@
   gap: 5px;
 }
 
-.github-logo{
+.github-logo {
   color: var(--dark-cream);
   font-size: 20px;
   margin: 10px;
   transition: 0.3s;
 }
-.github-logo:hover{
+.github-logo:hover {
   opacity: 80%;
 }
 
-.support-button{
+.support-button {
   color: var(--dark-cream);
   font-size: 12px;
   border-radius: 5px;
@@ -57,7 +57,7 @@
   transition: 0.3s;
   text-decoration: none;
 }
-.support-button:hover{
+.support-button:hover {
   background-color: var(--dark-cream);
   color: var(--page-color);
   cursor: pointer;
