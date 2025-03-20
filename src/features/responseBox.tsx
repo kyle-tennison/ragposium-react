@@ -17,14 +17,11 @@ export const ResponseBox: React.FC<Props> = ({papers}) => {
     const paperContainer = useRef<HTMLDivElement|null>(null);
     const paperResults = useRef<(HTMLDivElement|null)[]>([]);
 
-
     const animatePapers = () => {
         paperContainer.current?.classList.add("fade-in")
     }
 
     useEffect(() => {
-
-        console.debug("rah")
 
         if (paperContainer.current == null){
             return
@@ -38,6 +35,11 @@ export const ResponseBox: React.FC<Props> = ({papers}) => {
         if (!papers) {
             werePapers.current = false
             paperContainer.current.style.opacity = "0";
+            try {
+                paperContainer.current.classList.remove("fade-in");
+            } catch (error) {
+                console.error("Failed to remove class:", error);
+            }
         }
 
 
@@ -53,8 +55,8 @@ export const ResponseBox: React.FC<Props> = ({papers}) => {
                 
                 return <div key={idx} className='response-container' ref={(el) => {paperResults.current[idx] = el}}>
                     <a className='authors'>{paper.authors}</a>
-                    <h2>{paper.title}</h2>
-                    <p className='abstract'>{paper.abstract}</p>
+                    <a className='title' href={paper.url} target="_blank">{paper.title}</a>
+                    <div className='abstract'>{paper.abstract}</div>
                     <button className='cite'>
                         <i className="bi bi-quote"></i>
                     </button>
