@@ -2,12 +2,16 @@
   position: fixed;
   top: 0;
   left: 0;
-  padding: 10px 0px 10px 3%;
+  padding: 20px 3% 10px 3%;
   width: 100%;
   background-color: var(--page-color);
   /* box-shadow: 0px 4px 8px #00000020; */
   margin: 0;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
 .logo-container {
@@ -25,4 +29,37 @@
 .logo-container .logo {
   padding: 0;
   height: 35px;
+}
+
+.right {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.github-logo{
+  color: var(--dark-cream);
+  font-size: 20px;
+  margin: 10px;
+  transition: 0.3s;
+}
+.github-logo:hover{
+  opacity: 80%;
+}
+
+.support-button{
+  color: var(--dark-cream);
+  font-size: 12px;
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+  border: 1px solid var(--dark-cream);
+  transition: 0.3s;
+  text-decoration: none;
+}
+.support-button:hover{
+  background-color: var(--dark-cream);
+  color: var(--page-color);
+  cursor: pointer;
+  transform: scale(1.05);
 }
