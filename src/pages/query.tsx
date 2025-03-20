@@ -83,6 +83,12 @@ export default function Query() {
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             setTextareaContent(e.target.value);
           }}
+          onKeyDown={(ev) => {
+            if (ev.key == 'Enter' && !ev.shiftKey){ 
+                ev.preventDefault()
+                sendQuery()
+            }
+          }}
         ></textarea>
         <button onClick={sendQuery}>
           <i className="bi bi-arrow-up-circle-fill dark-cream"></i>
