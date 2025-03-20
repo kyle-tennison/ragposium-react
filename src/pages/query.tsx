@@ -1,9 +1,11 @@
 import "../styles/query.css";
+
 import Header from "../layouts/header";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { SearchAnalytics } from "../features/searchAnalytics";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { baseUrl, ragposiumClient } from "../services/ragposium-core";
+import { SyncLoader } from "react-spinners";
 
 import type { components } from "../types/ragposiumSchema";
 import { ResponseBox } from "../features/responseBox";
@@ -19,10 +21,64 @@ export default function Query() {
   const [availablePapers, setAvailablePapers] =
     useState<PaperQueryResponse | null>(null);
 
+  const [loading, setLoading] = useState(false);
+
+  const wasAtBottom = useRef<boolean>(false);
+
+  const checkIfAtBottom = () => {
+    const isAtBottom =
+      window.innerHeight + window.scrollY >= document.body.offsetHeight;
+
+    if (!isAtBottom) {
+      wasAtBottom.current = false;
+    }
+
+    if (isAtBottom && !wasAtBottom.current) {
+      const currentCount = availablePapers?.papers.length;
+
+      if (currentCount && currentCount > 0) {
+        console.log("Loading more papers...");
+        wasAtBottom.current = true;
+        setLoading(true);
+        const nextCount = currentCount + 5; // load 5 more papers
+        const paper_query_future = ragposiumClient.POST("/query-papers", {
+          body: {
+            query: textareaContent,
+            n_results: nextCount,
+          },
+        });
+
+        paper_query_future.then((value) => {
+          console.log("Paper query responded with:", value);
+
+          if (value.error) {
+            throw new Error(
+              `Failed to query papers: ${value.error.detail?.toString()}`,
+            );
+          }
+
+          setAvailablePapers(value.data);
+          setLoading(false);
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", checkIfAtBottom);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", checkIfAtBottom);
+    };
+  });
+
   const sendQuery = async () => {
     // reset from last request
     setSearchAnalytics(null);
     setAvailablePapers(null);
+
+    setLoading(true);
 
     console.debug("Sending textarea content:", textareaContent);
     console.debug("Using base url:", baseUrl);
@@ -63,6 +119,7 @@ export default function Query() {
       }
 
       setAvailablePapers(value.data);
+      setLoading(false);
     });
   };
 
@@ -101,6 +158,10 @@ export default function Query() {
       />
 
       <ResponseBox papers={availablePapers} />
+
+      <div className="spinner" style={{ opacity: loading ? "1" : "0" }}>
+        <SyncLoader color="var(--dark-cream)" loading={loading} size={10} />
+      </div>
     </div>
   );
 }

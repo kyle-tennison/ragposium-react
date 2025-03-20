@@ -1,6 +1,6 @@
 #query-page {
   width: 100%;
-  padding: 0;
+  padding: 0px 0px 200px 0px;
   margin: 0;
 
   display: flex;
@@ -66,4 +66,9 @@
 #query-page #query-box button i:hover {
   font-size: 24px;
   opacity: 80%;
+}
+
+#query-page .spinner {
+  align-self: center;
+  transform: scale(0.5);
 }
