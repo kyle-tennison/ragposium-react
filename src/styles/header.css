@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  padding: 20px 3% 10px 3%;
+  padding: 10px 3% 10px 3%;
   width: 100%;
   background-color: var(--page-color);
   /* box-shadow: 0px 4px 8px #00000020; */
@@ -12,6 +12,7 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  transition: 0.3s;
 }
 
 .logo-container {
@@ -23,12 +24,12 @@
 
 .logo-container .logo-font {
   font-weight: 300;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .logo-container .logo {
   padding: 0;
-  height: 35px;
+  height: 28px;
 }
 
 .right {
