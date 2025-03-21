@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with: 
-          repository: kyletennison/ragposium
+          repository: kyle-tennison/ragposium
           token: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
           submodules: true
 
