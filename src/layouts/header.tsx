@@ -14,7 +14,6 @@ export default function Header() {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      console.debug(window.scrollY);
       if (window.scrollY > SCROLL_THRESHOLD) {
         if (headerElement.current) {
           // headerElement.current.style.opacity = "0"
