@@ -85,10 +85,10 @@
   border-radius: 7px;
   box-shadow: 0px 4px 8px #00000040;
   /* Stow prior to animation */
-  transform: translateY(50px); 
+  transform: translateY(50px);
 }
 
-.fly-in{
+.fly-in {
   animation: fly-in 2s;
 }
 
@@ -123,4 +123,3 @@
     font-size: 16px;
   }
 }
-

@@ -188,10 +188,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "words",
-          "distances"
-        ],
+        "required": ["words", "distances"],
         "title": "DictionaryQueryResponse",
         "description": "Response to dictionary query."
       },
@@ -216,9 +213,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "message"
-        ],
+        "required": ["message"],
         "title": "MessageResponse",
         "description": "Generic request for messages."
       },
@@ -253,12 +248,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "url",
-          "title",
-          "authors",
-          "abstract"
-        ],
+        "required": ["url", "title", "authors", "abstract"],
         "title": "PaperMetadata",
         "description": "Metadata representation of an arXiv paper.\n\nAttributes\n----------\nurl : str\n    The URL of the paper.\ntitle : str\n    The title of the paper.\nauthors : str\n    The authors of the paper.\nabstract : str\n    The abstract of the paper."
       },
@@ -280,10 +270,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "papers",
-          "distances"
-        ],
+        "required": ["papers", "distances"],
         "title": "PaperQueryResponse",
         "description": "Response to paper query."
       },
@@ -299,10 +286,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "query",
-          "n_results"
-        ],
+        "required": ["query", "n_results"],
         "title": "QueryRequest",
         "description": "Requests papers corresponding to a query."
       },
@@ -332,11 +316,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
+        "required": ["loc", "msg", "type"],
         "title": "ValidationError"
       }
     }
