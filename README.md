@@ -2,7 +2,6 @@
 
 
 [![Trigger Deployment](https://github.com/kyle-tennison/ragposium-react/actions/workflows/trigger-deployment.yml/badge.svg)](https://github.com/kyle-tennison/ragposium-react/actions/workflows/trigger-deployment.yml)
-
 ![Bun Logo](https://img.shields.io/badge/Bun-000?logo=bun&logoColor=fff)
 ![React Logo](https://shields.io/badge/react-black?logo=react&style=for-the-badge)
 ![TS Logo](https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF&style=flat-square)
