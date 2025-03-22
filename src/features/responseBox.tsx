@@ -7,9 +7,10 @@ type PaperQueryResponse = components["schemas"]["PaperQueryResponse"];
 
 interface Props {
   papers: PaperQueryResponse | null;
+  onCopy: () => void;
 }
 
-export const ResponseBox: React.FC<Props> = ({ papers }) => {
+export const ResponseBox: React.FC<Props> = ({ papers, onCopy }) => {
   const werePapers = useRef<boolean>(false);
 
   const paperContainer = useRef<HTMLDivElement | null>(null);
@@ -81,10 +82,9 @@ export const ResponseBox: React.FC<Props> = ({ papers }) => {
                 );
               }
 
-              console.log("Copying bibtex to clipboard:", response.data)
               await navigator.clipboard.writeText(response.data)
-              console.log("Coppied to clipboard")
-
+              console.log("Coppied bibtex to clipboard:", response.data)
+              onCopy()
             }
             }
             
