@@ -18,10 +18,10 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --dark-cream: #fbf4e9;
-    --medium-cream: #6a6966;
-    --light-cream: #76736e;
-    --page-offset: #76736e;
-    --page-color: #575655;
+    --medium-cream: rgb(72, 69, 66, 80);
+    --light-cream: rgb(72, 69, 66, 70);
+    --page-offset: rgb(72, 69, 66, 70);
+    --page-color: #292928;
 
     --std-border-radius: 10px;
   }
