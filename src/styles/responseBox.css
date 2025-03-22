@@ -65,6 +65,7 @@
   top: 10px;
   color: var(--dark-cream);
   font-size: 16px;
+  outline: none;
 }
 
 #response-box .cite:hover {

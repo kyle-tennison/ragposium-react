@@ -1,14 +1,16 @@
 import { useEffect, useRef } from "react";
 import { components } from "../types/ragposiumSchema";
 import "../styles/responseBox.css";
+import { ragposiumClient } from "../services/ragposium-core";
 
 type PaperQueryResponse = components["schemas"]["PaperQueryResponse"];
 
 interface Props {
   papers: PaperQueryResponse | null;
+  onCopy: () => void;
 }
 
-export const ResponseBox: React.FC<Props> = ({ papers }) => {
+export const ResponseBox: React.FC<Props> = ({ papers, onCopy }) => {
   const werePapers = useRef<boolean>(false);
 
   const paperContainer = useRef<HTMLDivElement | null>(null);
@@ -64,7 +66,29 @@ export const ResponseBox: React.FC<Props> = ({ papers }) => {
               {paper.title}
             </a>
             <div className="abstract">{paper.abstract}</div>
-            <button className="cite">
+            <button className="cite" 
+            onClick={async ()=>{
+              const response = await ragposiumClient.POST("/generate-citation", {
+                params: {
+                  query: {
+                    arxiv_id: paper.arxiv_id || ''
+                  }
+                }
+              })
+
+              if (response.error){
+                throw new Error(
+                  `Failed to generate citation: ${response.error.detail?.toString()}`,
+                );
+              }
+
+              await navigator.clipboard.writeText(response.data)
+              console.log("Copied bibtex to clipboard:", response.data)
+              onCopy()
+            }
+            }
+            
+            >
               <i className="bi bi-quote"></i>
             </button>
           </div>
