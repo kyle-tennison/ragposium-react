@@ -62,7 +62,7 @@ export const ResponseBox: React.FC<Props> = ({ papers, onCopy }) => {
             }}
           >
             <a className="authors">{paper.authors}</a>
-            <a className="title" href={paper.url} target="_blank">
+            <a className="title" href={paper.url.replace("abs", "pdf")} target="_blank">
               {paper.title}
             </a>
             <div className="abstract">{paper.abstract}</div>
