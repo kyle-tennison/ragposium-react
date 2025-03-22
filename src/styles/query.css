@@ -73,7 +73,6 @@
   transform: scale(0.5);
 }
 
-
 @media (max-width: 700px) {
   #query-page #query-box {
     position: relative;
@@ -89,5 +88,4 @@
   #query-page #query-box .input-box {
     font-size: 16px;
   }
-  
 }
