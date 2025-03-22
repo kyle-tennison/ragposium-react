@@ -83,7 +83,7 @@ export const ResponseBox: React.FC<Props> = ({ papers, onCopy }) => {
               }
 
               await navigator.clipboard.writeText(response.data)
-              console.log("Coppied bibtex to clipboard:", response.data)
+              console.log("Copied bibtex to clipboard:", response.data)
               onCopy()
             }
             }

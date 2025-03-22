@@ -175,7 +175,7 @@ export default function Query() {
 
       <div className="copied-dialauge" ref={(el) => {copyPopupRef.current = el}}>
         <i className="bi bi-check-circle-fill"></i>
-        &ensp; Coppied BibTeX
+        &ensp; Copied BibTeX
       </div>
 
     </div>
