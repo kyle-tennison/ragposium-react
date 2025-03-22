@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { components } from "../types/ragposiumSchema";
 import "../styles/responseBox.css";
+import { ragposiumClient } from "../services/ragposium-core";
 
 type PaperQueryResponse = components["schemas"]["PaperQueryResponse"];
 
@@ -64,7 +65,30 @@ export const ResponseBox: React.FC<Props> = ({ papers }) => {
               {paper.title}
             </a>
             <div className="abstract">{paper.abstract}</div>
-            <button className="cite">
+            <button className="cite" 
+            onClick={async ()=>{
+              const response = await ragposiumClient.POST("/generate-citation", {
+                params: {
+                  query: {
+                    arxiv_id: paper.arxiv_id || ''
+                  }
+                }
+              })
+
+              if (response.error){
+                throw new Error(
+                  `Failed to generate citation: ${response.error.detail?.toString()}`,
+                );
+              }
+
+              console.log("Copying bibtex to clipboard:", response.data)
+              await navigator.clipboard.writeText(response.data)
+              console.log("Coppied to clipboard")
+
+            }
+            }
+            
+            >
               <i className="bi bi-quote"></i>
             </button>
           </div>
