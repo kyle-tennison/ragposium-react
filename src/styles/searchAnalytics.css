@@ -43,6 +43,12 @@
   padding-top: 5px;
 }
 
+@media (max-width: 700px) {
+  #search-analytics {
+    width: 90%;
+  }
+}
+
 /* Animations */
 
 .expand-horiz {

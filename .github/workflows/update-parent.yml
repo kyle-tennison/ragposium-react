@@ -2,7 +2,7 @@ name: Send submodule updates to parent repo
 
 on:
   push:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with: 
+        with:
           repository: kyle-tennison/ragposium
           token: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
           submodules: true
