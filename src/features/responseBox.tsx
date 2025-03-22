@@ -62,35 +62,44 @@ export const ResponseBox: React.FC<Props> = ({ papers, onCopy }) => {
             }}
           >
             <a className="authors">{paper.authors}</a>
-            <a className="title" href={paper.url} target="_blank">
+            <a
+              className="title"
+              href={paper.url.replace("abs", "pdf")}
+              target="_blank"
+            >
               {paper.title}
             </a>
             <div className="abstract">{paper.abstract}</div>
-            <button className="cite" 
-            onClick={async ()=>{
-              const response = await ragposiumClient.POST("/generate-citation", {
-                params: {
-                  query: {
-                    arxiv_id: paper.arxiv_id || ''
-                  }
-                }
-              })
-
-              if (response.error){
-                throw new Error(
-                  `Failed to generate citation: ${response.error.detail?.toString()}`,
+            <button
+              className="cite"
+              onClick={async () => {
+                const response = await ragposiumClient.POST(
+                  "/generate-citation",
+                  {
+                    params: {
+                      query: {
+                        arxiv_id: paper.arxiv_id || "",
+                      },
+                    },
+                  },
                 );
-              }
 
-              await navigator.clipboard.writeText(response.data)
-              console.log("Copied bibtex to clipboard:", response.data)
-              onCopy()
-            }
-            }
-            
+                if (response.error) {
+                  throw new Error(
+                    `Failed to generate citation: ${response.error.detail?.toString()}`,
+                  );
+                }
+
+                await navigator.clipboard.writeText(response.data);
+                console.log("Copied bibtex to clipboard:", response.data);
+                onCopy();
+              }}
             >
               <i className="bi bi-quote"></i>
             </button>
+            <a className="arxiv-link" href={paper.url} target="_blank">
+              <i className="bi bi-box-arrow-in-right"></i>
+            </a>
           </div>
         );
       })}

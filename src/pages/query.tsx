@@ -24,7 +24,7 @@ export default function Query() {
   const [loading, setLoading] = useState(false);
 
   const wasAtBottom = useRef<boolean>(false);
-  const copyPopupRef = useRef<HTMLDivElement|null>(null);
+  const copyPopupRef = useRef<HTMLDivElement | null>(null);
 
   const checkIfAtBottom = () => {
     const isAtBottom =
@@ -81,7 +81,6 @@ export default function Query() {
 
     setLoading(true);
 
-    console.debug("Sending textarea content:", textareaContent);
     console.debug("Using base url:", baseUrl);
 
     const dict_query_future = ragposiumClient.POST("/query-dict", {
@@ -125,13 +124,12 @@ export default function Query() {
   };
 
   const animateCopy = () => {
-    console.log("Animating copy")
-    copyPopupRef.current?.classList.add("fly-in")
+    copyPopupRef.current?.classList.add("fly-in");
 
     setTimeout(() => {
       copyPopupRef.current?.classList.remove("fly-in");
-    }, 2000)
-  }
+    }, 2000);
+  };
 
   return (
     <div id="query-page">
@@ -167,17 +165,21 @@ export default function Query() {
         show={searchAnalytics !== null}
       />
 
-      <ResponseBox papers={availablePapers} onCopy={animateCopy}/>
+      <ResponseBox papers={availablePapers} onCopy={animateCopy} />
 
       <div className="spinner" style={{ opacity: loading ? "1" : "0" }}>
         <SyncLoader color="var(--dark-cream)" loading={loading} size={10} />
       </div>
 
-      <div className="copied-dialauge" ref={(el) => {copyPopupRef.current = el}}>
+      <div
+        className="copied-dialauge"
+        ref={(el) => {
+          copyPopupRef.current = el;
+        }}
+      >
         <i className="bi bi-check-circle-fill"></i>
         &ensp; Copied BibTeX
       </div>
-
     </div>
   );
 }

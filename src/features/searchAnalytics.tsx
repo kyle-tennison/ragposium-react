@@ -29,7 +29,6 @@ export const SearchAnalytics: React.FC<Props> = ({ analytics, show }) => {
 
       setTimeout(
         () => {
-          console.log(`Showing index ${idx}`);
           item.classList.add("fade-in");
         },
         ANIMATE_DELAY * (idx + 1),
@@ -46,7 +45,6 @@ export const SearchAnalytics: React.FC<Props> = ({ analytics, show }) => {
 
       setTimeout(
         () => {
-          console.log(`Showing index ${idx}`);
           item.classList.add("expand-horiz");
         },
         ANIMATE_DELAY * (idx + 1),
@@ -64,9 +62,6 @@ export const SearchAnalytics: React.FC<Props> = ({ analytics, show }) => {
   };
 
   useEffect(() => {
-    console.log("show:", show);
-    console.log("analytics:", analytics);
-
     if (show) {
       animateShow();
     }
