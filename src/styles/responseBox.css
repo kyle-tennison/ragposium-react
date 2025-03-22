@@ -62,9 +62,9 @@
   transition: 0.2s;
   position: absolute;
   right: -5px;
-  top: 20px;
+  top: 5px;
   color: var(--dark-cream);
-  font-size: 16px;
+  font-size: 14px;
   outline: none;
 }
 
@@ -83,9 +83,9 @@
   transition: 0.2s;
   position: absolute;
   right: -5px;
-  top: 50px;
+  top: 30px;
   color: var(--dark-cream);
-  font-size: 20px;
+  font-size: 18px;
   outline: none;
 }
 
