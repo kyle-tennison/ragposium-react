@@ -1,6 +1,5 @@
 # Ragposium React
 
-
 [![Trigger Deployment](https://github.com/kyle-tennison/ragposium-react/actions/workflows/trigger-deployment.yml/badge.svg)](https://github.com/kyle-tennison/ragposium-react/actions/workflows/trigger-deployment.yml)
 ![Bun Logo](https://img.shields.io/badge/Bun-000?logo=bun&logoColor=fff)
 ![React Logo](https://shields.io/badge/react-black?logo=react&style=for-the-badge)
@@ -24,11 +23,11 @@ Then, to run locally, you can use:
 npm run dev
 ```
 
-To make requests, you will need to clone the primary [ragposium](https://github.com/kyle-tennison/ragposium) repo and follow the instructions on local docker spin-up. 
+To make requests, you will need to clone the primary [ragposium](https://github.com/kyle-tennison/ragposium) repo and follow the instructions on local docker spin-up.
 
 ## CI/CD
 
-Deployment is done on the behalf of the primary [ragposium](https://github.com/kyle-tennison/ragposium) repo; each push to the master branch triggers a new deployment. 
+Deployment is done on the behalf of the primary [ragposium](https://github.com/kyle-tennison/ragposium) repo; each push to the master branch triggers a new deployment.
 
 Each push to the main branch in this repo will trigger an `Update submodules` commit in the primary repo by the GitHub actions user. This, in turn, automatically deploys any pushes to the main branch of this repo.
 
