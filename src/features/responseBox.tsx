@@ -91,6 +91,9 @@ export const ResponseBox: React.FC<Props> = ({ papers, onCopy }) => {
             >
               <i className="bi bi-quote"></i>
             </button>
+            <a className="arxiv-link" href={paper.url} target="_blank">
+              <i className="bi bi-box-arrow-in-right"></i>
+            </a>
           </div>
         );
       })}
