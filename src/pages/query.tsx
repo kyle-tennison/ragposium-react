@@ -172,7 +172,7 @@ export default function Query() {
       </div>
 
       <div
-        className="copied-dialauge"
+        className="copied-dialogue"
         ref={(el) => {
           copyPopupRef.current = el;
         }}
